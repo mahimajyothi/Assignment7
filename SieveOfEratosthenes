@@ -1,0 +1,50 @@
+public class SieveOfEratosthenes {
+
+   public void sieves(int n) {
+       boolean[] sieves = new boolean[n + 1];
+       for (int i = 2; i < sieves.length; i++) {
+           sieves[i] = true;
+       }
+       int num = 2;
+       while (true) {
+           for (int i = 2;; i++) {
+               int multiple = num * i;
+               if (multiple > n) {
+                   break;
+               } else {
+                   sieves[multiple] = false;
+               }
+           }
+           boolean nextMultiplier = false;
+           for (int i = num + 1; i < n + 1; i++) {
+               if (sieves[i]) {
+                   num = i;
+                   nextMultiplier = true;
+                   break;
+               }
+           }
+           if (!nextMultiplier) {
+               break;
+           }
+       }
+       int count=0;
+       for (int i = 0; i < sieves.length; i++) {
+           if (sieves[i]) {
+               System.out.print(" "+i);
+               count++;
+           
+               if(count%10==0){
+           System.out.print("\n");
+}
+           }
+       }
+   }
+public static void main(String[] args) {
+       int n=600;
+       System.out.print("prime numbers less than");
+       System.out.println(" "+n+"\n");
+       SieveOfEratosthenes p = new SieveOfEratosthenes();
+       p.sieves(n);
+   }
+
+}
